@@ -39,7 +39,32 @@ namespace MUtil
             return dialog.FileName;
         }
 
-        //フォルダを選択させ、選択したフォルダパスを返します。
+        /// <summary>
+        /// 保存するファイルを選択させます。
+        /// </summary>
+        /// <param name="filetype"></param>
+        /// <param name="msg"></param>
+        /// <param name="initdir"></param>
+        /// <returns></returns>
+        public static string SelectSaveFile(string filetype,string msg="",string initdir="")
+        {
+            Console.WriteLine("Select SaveFile");
+            var d = new OpenFileDialog();
+            d.Filter = filetype;
+            d.InitialDirectory = initdir;
+            if ((bool)d.ShowDialog())
+            {
+                return d.FileName;
+            }
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// フォルダを選択させ、選択したフォルダパスを返します。
+        /// </summary>
+        /// <param name="desc"></param>
+        /// <param name="defaultdir"></param>
+        /// <returns></returns>
         public static string SelectFolder(string desc="",string defaultdir="./")
         {
             var fd = new Forms.FolderBrowserDialog();
