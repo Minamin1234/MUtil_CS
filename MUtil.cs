@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Microsoft.Win32;
+using Forms = System.Windows.Forms;
 
 namespace MUtil
 {
@@ -36,6 +37,22 @@ namespace MUtil
             dialog.ShowDialog();
             Console.WriteLine(dialog.FileName);
             return dialog.FileName;
+        }
+
+        //フォルダを選択させ、選択したフォルダパスを返します。
+        public static string SelectFolder(string desc="",string defaultdir="./")
+        {
+            var fd = new Forms.FolderBrowserDialog();
+            fd.Descripstion = desc;
+            fd.SelectedPath = System.IO.Path.GetDirectoryName(
+                Environment.GetCommandLineArgs()[0]
+            );
+            fd.ShowNewFolderButton = true;
+            if(fd.ShowDialog() == Forms.DialogResult.OK)
+            {
+                return fd.SelectedPath;
+            }
+            return string.Empty;
         }
 
         /// <summary>
